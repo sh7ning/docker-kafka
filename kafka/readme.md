@@ -1,6 +1,8 @@
 ### Run
 
 ```
+docker build -t kafka .
+
 docker run --name container-kafka --rm -it -p 9092:9092  -v $(pwd)/server.properties:/data/config/server.properties -v $(pwd)/data:/data/kafka-logs kafka /bin/bash
 
 kafka-server-start.sh config/server.properties --override log.dirs=/data/kafka-logs
