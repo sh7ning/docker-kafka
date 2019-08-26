@@ -39,6 +39,14 @@ kafka-console-producer.sh --broker-list localhost:9092 --topic test
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
+## 配置说明
+几个重要的 kafka 配置:
+
+* log.dirs  : Kafka的data目录
+* advertised.listeners  : docker 中特别受到影响，因为 Kafka通过zookeeper通过主机名做服务发现，所以可能客户端是 docker 的宿主机 ip，但是zk返回 docker hostname 从而发送消息失败
+* broker.id : 集群的时候很重要
+* zookeeper.connect : zk 的 host 配置
+
 ## todo
 
 增加 kafka manager
