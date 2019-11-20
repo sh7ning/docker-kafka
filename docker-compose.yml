@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  zookeeper:
+    image: docker-zk
+    build:
+      context: zookeeper/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./zookeeper/zoo.cfg:/data/conf/zoo.cfg
+    ports:
+      - 2181:2181
+
+  kafka:
+    image: docker-kafka
+    build:
+      context: kafka/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./kafka/server.properties:/data/config/server.properties
+      - ./runtime/data:/data/kafka-logs
+    ports:
+      - 9092:9092
+    command: kafka-server-start.sh config/server.properties --override log.dirs=/data/kafka-logs --override advertised.listeners=${ADVERTISED_LISTENERS} --override zookeeper.connect=${ZOOKEEPER_CONNECT}
