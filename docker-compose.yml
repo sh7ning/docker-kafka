@@ -18,6 +18,8 @@ services:
       context: kafka/
       dockerfile: Dockerfile
     restart: always
+    depends_on:
+      - zookeeper
     volumes:
       - ./kafka/server.properties:/data/config/server.properties
       - ./runtime/data:/data/kafka-logs
