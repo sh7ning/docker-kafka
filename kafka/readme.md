@@ -55,3 +55,41 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-
 
 1. 修改Kafka的data目录: log.dirs可以配置多个目录，需要用逗号分隔开
 1. 修改Kafka的logs目录: 在 ${KAFKA_HOME}/bin/kafka-run-class.sh 中修改 LOG_DIR
+
+
+### 一个配置
+
+> 注意 port与zookeeper.connect 需要修改，其他参数也需要关注
+```
+broker.id=0
+
+port=9092
+
+host.name=172.0.0.1
+
+num.network.threads=2
+
+num.io.threads=8
+
+socket.send.buffer.bytes=1048576
+
+socket.receive.buffer.bytes=1048576
+
+socket.request.max.bytes=104857600
+
+log.dirs=/usr/kafka-logs
+
+num.partitions=2
+
+log.retention.hours=168
+
+log.segment.bytes=536870912
+
+log.retention.check.interval.ms=60000
+
+log.cleaner.enable=false
+
+zookeeper.connect=172.0.0.1:2181/kafka
+
+zookeeper.connection.timeout.ms=1000000    
+```
